@@ -36,6 +36,29 @@ app.post('/data', (req, res) => {
   });
 });
 
+// Ruta para obtener los nombres de los artistas
+app.get('/artistas', (req, res) => {
+  const query = 'SELECT ID_Artista, nombre_banda AS Nombre FROM artista';
+  db.query(query, (err, results) => {
+    if (err) {
+      return res.status(500).send('Error al obtener los artistas');
+    }
+    res.json(results);
+  });
+});
+
+// Ruta para obtener los detalles de un artista por su ID
+app.get('/artistas/:id', (req, res) => {
+  const { id } = req.params;
+  const query = 'SELECT * FROM artista WHERE ID_Artista = ?';
+  db.query(query, [id], (err, results) => {
+    if (err) {
+      return res.status(500).send('Error al obtener los detalles del artista');
+    }
+    res.json(results[0]);
+  });
+});
+
 // Inicia el servidor
 app.listen(3000, () => {
   console.log('Servidor escuchando en el puerto 3000');
