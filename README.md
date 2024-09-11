@@ -21,3 +21,5 @@ en el directorio raíz(donde se encuentra la carpeta descargada) abrir la consol
 
 npm install
 node server.js
+
+es probable que se demore en conectar a la base de datos.
