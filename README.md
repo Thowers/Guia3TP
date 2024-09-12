@@ -20,6 +20,6 @@ descripcion text not null
 en el directorio raíz(donde se encuentra la carpeta descargada) abrir la consola de visual y ejecutar los siguientes codigos
 
 npm install
-node server.js
+para conectar la base de datos a visual hay que navegar por medio de la consola hasta donde este el directorio del proyecto y colocar este comando 'node server.js'
 
 es probable que se demore en conectar a la base de datos.
