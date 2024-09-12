@@ -11,7 +11,7 @@
     --estilo-fuente:normal;
 }
 
-*{
+html{
     padding: 0;
     margin: 0;
     font-family: var(--fuente-base);
@@ -20,7 +20,7 @@
     
 }
 
-.body_registro_artista{    
+body{    
     background-color: var(--maindark);
 }
 
@@ -65,14 +65,6 @@
     justify-content: space-between;
     gap: 20px;                          
     width: 100%;
-}
-
-.formulario_botones_wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin: 0 auto;
 }
 
 .container_registro{
@@ -221,4 +213,73 @@ a{
     width: 100%;
     position: fixed;
     bottom: 0;
+}
+
+/** ------------- Style Edicion artistas ------------------ **/
+
+.titulo_detalles_artista{
+    background-color: var(--maindark);
+    text-align: center;
+    color: var(--primer-color);
+}
+
+.botones_edicion{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+    margin-left: 10rem;
+}
+
+.btnguardar_artista, .btneliminar_artista, .btn_volver{
+    padding: 15px 25px;
+    border: unset;
+    border-radius: 15px;
+    color: #FFFFFF;
+    z-index: 1;
+    background: #e8e8e8;
+    position: relative;
+    font-weight: 1000;
+    font-size: 17px;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    transition: all 250ms;
+    overflow: hidden;
+}
+
+.btnguardar_artista::before, .btneliminar_artista::before, .btn_volver::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    border-radius: 15px;
+    background-color: #515151;
+    z-index: -1;
+    -webkit-box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    box-shadow: 4px 8px 19px -3px rgba(0,0,0,0.27);
+    transition: all 250ms
+}
+
+.btnguardar_artista:hover, .btneliminar_artista:hover, .btn_volver:hover {
+    color: #e8e8e8;
+}
+
+.btnguardar_artista:hover::before, .btneliminar_artista:hover::before ,.btn_volver:hover::before {
+    width: 100%;
+}
+
+.btnguardar_artista{
+    background-color: var(--quinto-color);
+}
+
+.btneliminar_artista{
+    background-color: var(--segundo-color);
+}
+
+.btn_volver{
+    background-color: var(--cuarto-color);
 }

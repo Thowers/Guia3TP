@@ -22,7 +22,7 @@ db.connect((err) => {
   console.log('Conectado a la base de datos');
 });
 
-// Ruta para manejar el envío de datos
+// Codigo para manejar el envío de datos
 app.post('/data', (req, res) => {
   const { nombre_banda, debut, contrato, genero, estado, pais, descripcion } = req.body;
   const query = 'INSERT INTO artista (nombre_banda, debut, contrato, genero, estado, pais, descripcion) VALUES (?, ?, ?, ?, ?, ?, ?)';
@@ -36,9 +36,9 @@ app.post('/data', (req, res) => {
   });
 });
 
-// Ruta para obtener los nombres de los artistas
+// Codigo para obtener los nombres de los artistas
 app.get('/artistas', (req, res) => {
-  const query = 'SELECT ID_Artista, nombre_banda AS Nombre FROM artista';
+  const query = 'SELECT ID_Artista, nombre_banda FROM artista';
   db.query(query, (err, results) => {
     if (err) {
       return res.status(500).send('Error al obtener los artistas');
@@ -47,7 +47,7 @@ app.get('/artistas', (req, res) => {
   });
 });
 
-// Ruta para obtener los detalles de un artista por su ID
+// Codigo para obtener los detalles de un artista por su ID
 app.get('/artistas/:id', (req, res) => {
   const { id } = req.params;
   const query = 'SELECT * FROM artista WHERE ID_Artista = ?';
@@ -56,6 +56,35 @@ app.get('/artistas/:id', (req, res) => {
       return res.status(500).send('Error al obtener los detalles del artista');
     }
     res.json(results[0]);
+  });
+});
+
+// Codigo para actualizar un artista
+app.put('/artistas/:id', (req, res) => {
+  const { id } = req.params;
+  const { nombre_banda, debut, contrato, genero, estado, pais, descripcion } = req.body;
+  const query = `UPDATE artista SET nombre_banda = ?, debut = ?, contrato = ?, genero = ?, estado = ?, pais = ?, descripcion = ? WHERE ID_Artista = ?`;
+  
+  db.query(query, [nombre_banda, debut, contrato, genero, estado, pais, descripcion, id], (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Error al actualizar los datos');
+    }
+    res.json({ message: 'Artista actualizado correctamente' });
+  });
+});
+
+// Codigo para eliminar un artista
+app.delete('/artistas/:id', (req, res) => {
+  const { id } = req.params;
+  const query = 'DELETE FROM artista WHERE ID_Artista = ?';
+  
+  db.query(query, [id], (err, results) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).send('Error al eliminar el artista');
+    }
+    res.json({ message: 'Artista eliminado correctamente' });
   });
 });
 
